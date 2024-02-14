@@ -1,0 +1,111 @@
+.contact{
+    background-color: #faf8f8;
+    width: 100%;
+    font-family: Arial
+
+}
+
+.contact-content {
+    padding: 15px;
+    font-size: 16px;
+}
+
+textarea{
+    resize: none;
+    height: 200px;
+}
+
+.info_input{
+    width: 100%;
+    height: 30px;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    align-items: center;
+    margin-bottom: 5px;
+    background-color: white;
+    border: 0.5px solid gray;
+}
+.info_input__message{
+    font-family: Arial;
+    width: 100%;
+    height: 200px;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    align-items: center;
+    margin-bottom: 5px;
+    background-color: white;
+    border: 0.5px solid gray;
+}
+
+/*.info_input:focus-visible{*/
+/*    outline-color: green;*/
+/*}*/
+/*.info_input__message:focus-visible{*/
+/*    outline-color: green;*/
+/*}*/
+
+.contact-content__category {
+    padding: 15px;
+    font-size: 16px;
+}
+.contact-content__category-title {
+    color: rgba(39, 140, 39, 0.96);
+}
+
+button {
+    width: 100%;
+    font-weight: bold;
+    padding: 5px;
+    background-color:rgba(39, 140, 39, 0.96);
+    color: white;
+    border: transparent;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+
+input[type="email"] {
+    appearance: none;
+
+    width: 100%;
+    border: 1px solid #333;
+    margin: 0;
+
+    font-family: inherit;
+    font-size: 90%;
+
+    box-sizing: border-box;
+}
+
+/*!* This is our style for the invalid fields *!*/
+/*input:invalid {*/
+/*    border-color: #900;*/
+/*    color: #990000;*/
+/*}*/
+
+/*input:focus:invalid {*/
+/*    outline: none;*/
+/*}*/
+
+/* This is the style of our error messages */
+.error {
+    width: 100%;
+    padding: 0;
+
+    font-size: 80%;
+    color: white;
+    background-color: #900;
+    border-radius: 0 0 5px 5px;
+
+    box-sizing: border-box;
+}
+
+.error.active {
+    display: block;
+    margin-bottom: 4px;
+    padding: 0.3em;
+}

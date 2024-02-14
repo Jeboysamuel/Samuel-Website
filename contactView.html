@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>CV Samuel Pichon</title>
+    <link rel="stylesheet" href="stylesheets/styleProfile.css">
+    <link rel="stylesheet" href="stylesheets/styleContact.css">
+    <script defer src="js/gdpr.js"></script>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+</head>
+
+<body>
+
+<div class="page">
+    <section class="personalia">
+
+        <img class="person-logo" src="images/passfoto-samuel.jpg">
+
+        <h1 class="person-name">Samuel Pichon</h1>
+
+    </section>
+
+    <section class="contact">
+
+        <section class="contact-content">
+            <header class="profile-content__category-title">
+                <h3 class="contact-content__category-title">Waarneer ben ik aanwezig</h3>
+                <hr>
+            </header>
+
+
+            <header class="profile-content__category-title">
+                <h3 class="contact-content__category-title">Stuur mij een bericht</h3>
+                <hr>
+            </header>
+
+            <form novalidate action="" method="post" class="form-contact">
+
+                <input class="info_input" type="text" name="name" id="name" placeholder="Je voornaam" required>
+                <input class="info_input" type="text" name="email" id="email" placeholder="Je email" required>
+                <input class="info_input" type="text" name="number" id="number" pattern="(\+31|0)([1-9][0-9]?|6[1-9])\d{7}" placeholder="Je telefoonnummer" required>
+                <input class="info_input" type="text" name="subject" id="subject" maxlength="200" placeholder="Het onderwerp" required>
+                <textarea class="info_input__message" name="message" id="message" maxlength="600" required placeholder="Het bericht"></textarea>
+
+                <button class="form-button" type="submit">Verstuur!</button>
+                <a href="profileView.html">
+                    <button class="form-button" type="button">Terug</button>
+                </a>
+            </form>
+        </section>
+    </section>
+</div>
+
+</body>
+
+</html>
