@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="stylesheets/styleProfile.css">
     <link rel="stylesheet" href="stylesheets/styleContact.css">
     <script defer src="js/app.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
 </head>
@@ -37,18 +38,28 @@
                 <hr>
             </header>
 
-            <form novalidate action="" method="post" class="form-contact">
+            <form action="" method="post" class="form-contact">
 
-                <input class="info_input" type="text" name="name" id="name" placeholder="Je voornaam" required>
-                <input class="info_input" type="text" name="email" id="email" placeholder="Je email" required>
+                <input class="info_input" type="text" name="name" id="name" placeholder="Je voornaam" required minlength="2">
+                <input class="info_input" type="text" name="surname" id="surname" placeholder="Je achternaam" required minlength="2">
+                <input class="info_input" type="email" name="email" id="email" placeholder="Je email" pattern="/^[\w-]+(?:\.[\w-]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,7}$/" required>
                 <input class="info_input" type="text" name="number" id="number" pattern="(\+31|0)([1-9][0-9]?|6[1-9])\d{7}" placeholder="Je telefoonnummer" required>
                 <input class="info_input" type="text" name="subject" id="subject" maxlength="200" placeholder="Het onderwerp" required>
                 <textarea class="info_input__message" name="message" id="message" maxlength="600" required placeholder="Het bericht"></textarea>
 
-                <button class="form-button" type="submit">Verstuur!</button>
+                <div id="cappieDiv">
+
+                </div>
+
+
+                <div class="contact-content__loading__div" id="loading">
+
+                </div>
+
+                <button class="button_contact" type="submit">Verstuur!</button>
             </form>
             <a href="index.html">
-                <button class="form-button" type="button">Terug</button>
+                <button class="button_contact" type="button">Terug</button>
             </a>
         </section>
     </section>

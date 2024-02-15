@@ -9,6 +9,16 @@
     padding: 15px;
     font-size: 16px;
 }
+.contact-content__loading{
+    display: flex!important;
+    align-self: center;
+    font-size: 30px;
+}
+.contact-content__loading__div{
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
 
 textarea{
     resize: none;
@@ -67,25 +77,17 @@ button {
     margin-bottom: 5px;
 }
 
-
-input[type="email"] {
-    appearance: none;
-
-    width: 100%;
-    border: 1px solid #333;
-    margin: 0;
-
-    font-family: inherit;
-    font-size: 90%;
-
-    box-sizing: border-box;
+.button_contact:active{
+    background-color: #5c6166;
 }
 
-/*!* This is our style for the invalid fields *!*/
-/*input:invalid {*/
-/*    border-color: #900;*/
-/*    color: #990000;*/
-/*}*/
+/* This is our style for the invalid fields */
+input:invalid {
+    border-color: #900;
+}
+textarea:invalid{
+    border-color: #900;
+}
 
 /*input:focus:invalid {*/
 /*    outline: none;*/
