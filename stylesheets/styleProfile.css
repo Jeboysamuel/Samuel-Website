@@ -49,7 +49,7 @@
     border: transparent;
     border-radius: 5px;
 }
-.button_contact:hover{
+.button_contact:active{
     background-color: #5c6166;
 }
 
