@@ -38,7 +38,7 @@
                 <div>2/19/24</div>
                 <div>4/20/24</div>
                 <div>4/20/24</div>
-                <div>4/20/24</div>
+                <div>4/20/4</div>
             </div>
 
 
@@ -51,18 +51,26 @@
 
                 <input class="info_input" type="text" name="name" id="name" placeholder="Je voornaam" required minlength="2">
                 <input class="info_input" type="text" name="surname" id="surname" placeholder="Je achternaam" required minlength="2">
-                <input class="info_input" type="email" name="email" id="email" placeholder="Je email" pattern="/^[\w-]+(?:\.[\w-]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,7}$/" required>
+                <input class="info_input" type="email" name="email" id="email" placeholder="Je email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
                 <input class="info_input" type="text" name="number" id="number" pattern="(\+31|0)([1-9][0-9]?|6[1-9])\d{7}" placeholder="Je telefoonnummer" required>
                 <input class="info_input" type="text" name="subject" id="subject" maxlength="200" placeholder="Het onderwerp" required>
                 <textarea class="info_input__message" name="message" id="message" maxlength="600" required placeholder="Het bericht"></textarea>
 
-                <div class="contact-captcha" id="cappieDiv">
 
+
+
+                <div class="overlap-container">
+                    <div class="contact-captcha" id="cappieDiv">
+
+                    </div>
+
+                    <div class="contact-content__loading__div" id="loading">
+
+                    </div>
                 </div>
 
-                <div class="contact-content__loading__div" id="loading">
 
-                </div>
+
 
                 <button class="contact_button" type="submit">Verstuur!</button>
 

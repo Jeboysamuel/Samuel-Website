@@ -2,6 +2,7 @@ const form = document.querySelector("form");
 const divLoading = document.getElementById("loading");
 const divCappie = document.getElementById("cappieDiv")
 const name = document.getElementById("name");
+const surname = document.getElementById("surname");
 const email = document.getElementById("email");
 const number = document.getElementById("number");
 const subject = document.getElementById("subject");
@@ -45,27 +46,28 @@ form.addEventListener("submit", async (event) => {
     }
     let nummer = randomNumber1 + randomNumber2;
     if (parseInt(cappie.value) !== nummer) {
-        LoadingError("Captcha");
+        LoadingAlert("Captcha");
         GetCaptcha();
         return;
     }
-    divLoading.innerHTML = '<i class="fas fa-spinner fa-pulse contact-content__loading"></i>';
+    LoadingAlert("Loading");
 
     let response = await fetch('https://localhost:7254/api/Mail', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
             name: name.value,
+            surname: surname.value,
             email: email.value,
             number: number.value,
             subject: subject.value,
             message: message.value
         })
     }).then(response => {
-        LoadingError("Succes");
+        LoadingAlert("Succes");
         form.reset();
     }).catch(response => {
-        LoadingError("Error");
+        LoadingAlert("Error");
 
     })
 });
@@ -74,12 +76,12 @@ function randomNummer(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function LoadingError(status){
+function LoadingAlert(status){
     if(status === "Error"){
         divLoading.innerHTML = '<label>' +
             ' <input type="checkbox" class="alertCheckbox" autocomplete="off" /> ' +
             '<div class="alert error"> <span class="alertClose">&nbsp;&nbsp;X</span> <span class="alertText">' +
-            'Het is niet gelukt om de email te sturen! Probeer het opniew <br class="clear"/></span> ' +
+            'Het is niet gelukt om de email te versturen!<br class="clear"/></span> ' +
             '</div> </label>';
     }
     if(status === "Succes"){
@@ -95,6 +97,9 @@ function LoadingError(status){
             '<div class="alert error"> <span class="alertClose">&nbsp;&nbsp;X</span> <span class="alertText">' +
             'De captcha is verkeerd ingevuld! Probeer het opniew! <br class="clear"/></span> ' +
             '</div> </label>';
+    }
+    if(status === "Loading"){
+        divLoading.innerHTML = '<div class="spinner"></div>';
     }
 }
 
