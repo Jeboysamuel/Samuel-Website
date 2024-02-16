@@ -7,12 +7,11 @@ const number = document.getElementById("number");
 const subject = document.getElementById("subject");
 const message = document.getElementById("message");
 
-let randomNumber1 = randomNummer(1, 4);
-let randomNumber2 = randomNummer(1,4);
 
-divCappie.innerHTML = '<label For="cappie">Controlevraag: Wat is ' + randomNumber1 +'+' + randomNumber2 + ' </label> <input class="info_input" type="text" name="cappie" id="cappie" required/>';
-const cappie = document.getElementById("cappie")
+let randomNummer1;
+let randomNummer2;
 
+GetCaptcha();
 
 email.addEventListener("input", (event) => {
     if (email.validity.typeMismatch) {
@@ -46,6 +45,8 @@ form.addEventListener("submit", async (event) => {
     }
     let nummer = randomNumber1 + randomNumber2;
     if (parseInt(cappie.value) !== nummer) {
+        LoadingError("Captcha");
+        GetCaptcha();
         return;
     }
     divLoading.innerHTML = '<i class="fas fa-spinner fa-pulse contact-content__loading"></i>';
@@ -88,6 +89,21 @@ function LoadingError(status){
             'De email is succesvol verzonden!<br class="clear"/></span> ' +
             '</div> </label>';
     }
+    if(status === "Captcha"){
+        divLoading.innerHTML = '<label>' +
+            ' <input type="checkbox" class="alertCheckbox" autocomplete="off" /> ' +
+            '<div class="alert error"> <span class="alertClose">&nbsp;&nbsp;X</span> <span class="alertText">' +
+            'De captcha is verkeerd ingevuld! Probeer het opniew! <br class="clear"/></span> ' +
+            '</div> </label>';
+    }
+}
+
+function GetCaptcha(){
+    randomNumber1 = randomNummer(1,4);
+    randomNumber2 = randomNummer(1,4);
+
+    divCappie.innerHTML = '<label For="cappie">Controlevraag: Wat is ' + randomNumber1 +'+' + randomNumber2 + ' </label> <input class="info_input" type="text" name="cappie" id="cappie" required/>';
+    const cappie = document.getElementById("cappie")
 }
 
 
