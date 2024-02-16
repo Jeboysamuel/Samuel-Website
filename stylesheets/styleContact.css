@@ -1,8 +1,9 @@
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css');
+
 .contact{
     background-color: #faf8f8;
     width: 100%;
     font-family: Arial
-
 }
 
 .contact-content {
@@ -10,14 +11,41 @@
     font-size: 16px;
 }
 .contact-content__loading{
-    display: flex!important;
+    display: flex;
     align-self: center;
     font-size: 30px;
 }
 .contact-content__loading__div{
+    z-index: auto;
     padding: 15px;
     display: flex;
-    flex-direction: column;
+    justify-content: space-around;
+}
+
+.contact-captcha{
+    margin-top:50px ;
+    width: 30%;
+}
+.contact-error{
+
+    width: 50%;
+    padding:10px;
+    border-radius: 5px;
+    background-color: #3abb37;
+    color: white;
+    justify-content: space-around;
+
+}
+.contact-succes{
+    display: flex;
+    width: 50%;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    border-radius: 5px;
+    background-color: #9ebd4f;
+    justify-content: space-around;
+    flex-direction: row-reverse;
+    color: white;
 }
 
 textarea{
@@ -26,29 +54,32 @@ textarea{
 }
 
 .info_input{
-    width: 100%;
+    width: calc(100% - 10px);
     height: 30px;
     font-size: 14px;
     display: flex;
     flex-direction: column;
-    border-radius: 5px;
+    border-radius: 4px;
     align-items: center;
     margin-bottom: 5px;
+    padding-left: 10px;
     background-color: white;
-    border: 0.5px solid gray;
+    border: 0.5px solid #d5d5d5;
 }
 .info_input__message{
-    font-family: Arial;
-    width: 100%;
-    height: 200px;
+    font-family: Helvetica;
+    width: calc(100% - 10px);
+    height: 100px;
     font-size: 14px;
     display: flex;
     flex-direction: column;
-    border-radius: 5px;
+    border-radius: 4px;
     align-items: center;
     margin-bottom: 5px;
+    padding-left: 10px;
+    padding-top: 4px;
     background-color: white;
-    border: 0.5px solid gray;
+    border: 0.5px solid #d5d5d5;
 }
 
 /*.info_input:focus-visible{*/
@@ -58,43 +89,74 @@ textarea{
 /*    outline-color: green;*/
 /*}*/
 
+.overlap-container{
+    position: relative;
+}
+
 .contact-content__category {
     padding: 15px;
     font-size: 16px;
 }
 .contact-content__category-title {
     color: rgba(39, 140, 39, 0.96);
+    font-size: 22px
 }
 
-button {
+.contact_button {
     width: 100%;
-    font-weight: bold;
-    padding: 5px;
-    background-color:rgba(39, 140, 39, 0.96);
-    color: white;
-    border: transparent;
+    padding: 10px;
     border-radius: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+
+
 }
 
-.button_contact:active{
+.contact_button:hover {
+    background-color: #04AA6D; /* Green */
+    color: white;
+}
+
+.contact.button:active{
     background-color: #5c6166;
 }
 
 /* This is our style for the invalid fields */
-input:invalid {
-    border-color: #900;
+/*input:invalid {*/
+/*    border-color: #900;*/
+/*}*/
+/*textarea:invalid{*/
+/*    border-color: #900;*/
+/*}*/
+
+input:focus:invalid {
+    outline: none;
 }
-textarea:invalid{
-    border-color: #900;
+textarea:focus:invalid {
+    outline: none;
 }
 
-/*input:focus:invalid {*/
-/*    outline: none;*/
-/*}*/
+.spinner{
+    position: absolute;
+    top: 50px;
+    height: 30px;
+    width: 30px;
+    border: 6px solid;
+    border-color: grey transparent grey transparent;
+    border-radius: 50%;
+    animation: spin 1.3s ease infinite;
+}
+
+@keyframes spin {
+    to{
+        transform: rotate(360deg);
+    }
+}
+
 
 /* This is the style of our error messages */
 .error {
+    z-index: auto;
     width: 100%;
     padding: 0;
 
@@ -110,4 +172,120 @@ textarea:invalid{
     display: block;
     margin-bottom: 4px;
     padding: 0.3em;
+}
+
+/*STYLING VOOR DATUMS*/
+.container-dates {
+    font-family: Arial;
+    font-size: 12px;
+    color: white;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 15% 15% 15% 15% 15% 15%;
+    grid-gap: 8px;
+}
+
+.container-dates div {
+    background-color: #7f899b;
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+}
+
+
+/*STYLING VOOR ALERT*/
+.alert {
+    width: auto;
+    height: auto;
+    padding: 10px;
+    margin: 10px;
+    line-height: 1.8;
+    border-radius: 5px;
+    cursor: hand;
+    font-family: sans-serif;
+    font-weight: 400;
+}
+
+.alertCheckbox {
+    position: absolute;
+    display: none;
+    left: 50px;
+    padding-right: 5px ;
+}
+
+:checked + .alert {
+    display: none;
+}
+
+.alertText {
+    display: table;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 16px;
+}
+
+.alertClose {
+    float: right;
+    padding-top: 5px;
+    font-size: 10px;
+}
+
+.clear {
+    clear: both;
+}
+
+.info {
+    background-color: #EEE;
+    border: 1px solid #DDD;
+    color: #999;
+}
+
+.success {
+    background-color: #EFE;
+    border: 1px solid #DED;
+    color: #9A9;
+}
+
+.notice {
+    background-color: #EFF;
+    border: 1px solid #DEE;
+    color: #9AA;
+}
+
+.warning {
+    background-color: #FDF7DF;
+    border: 1px solid #FEEC6F;
+    color: #C9971C;
+}
+
+.error {
+    background-color: #FEE;
+    border: 1px solid #EDD;
+    color: #A66;
+}
+
+@media only screen and (min-width: 800px) {
+
+    .contact {
+        flex-direction: row;
+    }
+
+    .person-name{
+        order: -1;
+    }
+    .alert {
+        z-index: auto;
+        position: absolute;
+        top: 1px;
+        width: auto;
+        height: auto;
+        padding: 10px;
+        margin: 10px;
+        line-height: 1.8;
+        border-radius: 5px;
+        cursor: hand;
+        font-family: sans-serif;
+        font-weight: 400;
+    }
 }
