@@ -7,43 +7,43 @@ const email = document.getElementById("email");
 const number = document.getElementById("number");
 const subject = document.getElementById("subject");
 const message = document.getElementById("message");
-
+const button = document.getElementById("submitButton");
 
 let randomNummer1;
 let randomNummer2;
 
+disableButton();
 GetCaptcha();
 
+name.addEventListener("input", (event)=>{
+    validateName(true)
+    validateForm();
+});
+surname.addEventListener("input", (event)=>{
+    validateForm();
+});
+
 email.addEventListener("input", (event) => {
-    if (email.validity.typeMismatch) {
-        email.setCustomValidity("Voer een geldig email in!");
-        email.reportValidity();
-    } else {
-        email.setCustomValidity("");
-    }
+    validateEmail(true)
+    validateForm();
 });
 
 number.addEventListener("input", (event) => {
-    if (number.validity.patternMismatch) {
-        number.setCustomValidity("Voer een geldig nummer in!");
-        number.reportValidity();
-    } else {
-        number.setCustomValidity("");
-    }
+    validateNumber(true)
+    validateForm();
 });
+
+// subject.addEventListener("blur", (event)=>{
+//     validateForm();
+// });
+// message.addEventListener("blur", (event)=>{
+//     validateForm();
+// });
 
 form.addEventListener("submit", async (event) => {
     // Then we prevent the form from being sent by canceling the event
     event.preventDefault();
 
-    // if the email field is valid, we let the form submit
-    if (!email.validity.valid) {
-        // If it isn't, we display an appropriate error message
-        return;
-    }
-    if (!number.validity.valid) {
-        return;
-    }
     let nummer = randomNumber1 + randomNumber2;
     if (parseInt(cappie.value) !== nummer) {
         LoadingAlert("Captcha");
@@ -101,6 +101,86 @@ function LoadingAlert(status){
     if(status === "Loading"){
         divLoading.innerHTML = '<div class="spinner"></div>';
     }
+}
+
+function validateForm(){
+    const validation = [
+            // validateName(),
+            validateEmail(),
+            validateNumber()
+        ];
+
+    if(validation.includes(false)){
+        disableButton();
+    }
+    else{
+        enableButton();
+    }
+}
+function validateEmail(displayError= false) {
+    const emailValue = email.value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    let errorMessage = "";
+    if (!emailValue) { // Check if email is empty
+        errorMessage = "Vul alsjeblieft een emailadres in.";
+    } else if (!emailRegex.test(emailValue)) { // Check if email format is invalid
+        errorMessage = "Email adres is incorrect";
+    } else {
+        email.setCustomValidity("");
+        return true;
+    }
+    if(displayError) {
+        email.setCustomValidity(errorMessage);
+        email.reportValidity();
+    }
+    return false;
+}
+function validateNumber(displayError = false){
+    const numberValue = number.value.trim();
+    const numberRegex = /^(?:(?:\+|00)31|0)(?:6\d{8})$/;
+
+    let errorMessage = "";
+    if (!numberValue) { // Check if email is empty
+        errorMessage = "Vul alsjeblieft een telefoonnummer in.";
+    } else if (!numberRegex.test(numberValue)) { // Check if email format is invalid
+        errorMessage = "Telefoonnummer is incorrect";
+    } else {
+        number.setCustomValidity("");
+        return true;
+    }
+    if(displayError) {
+        number.setCustomValidity(errorMessage);
+        number.reportValidity();
+    }
+    return false;
+}
+
+function validateName(displayError, nameType){
+    const nameValue = (nameType).value.trim();
+    const nameRegex = /^[a-zA-ZÀ-ÖØ-öø-ÿ\s'-]+$/;
+
+    let errorMessage = "";
+    if (!nameValue) { // Check if email is empty
+        errorMessage = "Vul alsjeblieft een naam in.";
+    } else if (!nameRegex.test(nameValue)) { // Check if email format is invalid
+        errorMessage = "Naam is incorrect";
+    } else {
+        (nameType).setCustomValidity("");
+        return true;
+    }
+    if(displayError) {
+        (nameType).setCustomValidity(errorMessage);
+        (nameType).reportValidity();
+    }
+    return false;
+}
+
+function disableButton(){
+    button.setAttribute("disabled", "");
+}
+function enableButton(){
+    button.removeAttribute("disabled");
 }
 
 function GetCaptcha(){
