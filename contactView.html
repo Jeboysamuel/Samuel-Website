@@ -49,12 +49,12 @@
 
             <form action="" method="post" class="form-contact">
 
-                <input class="info_input" type="text" name="name" id="name" placeholder="Je voornaam" required minlength="2">
-                <input class="info_input" type="text" name="surname" id="surname" placeholder="Je achternaam" required minlength="2">
-                <input class="info_input" type="email" name="email" id="email" placeholder="Je email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
-                <input class="info_input" type="text" name="number" id="number" pattern="(\+31|0)([1-9][0-9]?|6[1-9])\d{7}" placeholder="Je telefoonnummer" required>
-                <input class="info_input" type="text" name="subject" id="subject" maxlength="200" placeholder="Het onderwerp" required>
-                <textarea class="info_input__message" name="message" id="message" maxlength="600" required placeholder="Het bericht"></textarea>
+                <input class="info_input" type="text" name="name" id="name" placeholder="Je voornaam">
+                <input class="info_input" type="text" name="surname" id="surname" placeholder="Je achternaam">
+                <input class="info_input" type="email" name="email" id="email" placeholder="Je email">
+                <input class="info_input" type="text" name="number" id="number" placeholder="Je telefoonnummer">
+                <input class="info_input" type="text" name="subject" id="subject" placeholder="Het onderwerp" >
+                <textarea class="info_input__message" name="message" id="message" placeholder="Het bericht"></textarea>
 
 
 
@@ -72,7 +72,7 @@
 
 
 
-                <button class="contact_button" type="submit">Verstuur!</button>
+                <button class="contact_button" id="submitButton" type="submit">Verstuur!</button>
 
 
             </form>

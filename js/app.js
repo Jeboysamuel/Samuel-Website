@@ -7,43 +7,46 @@ const email = document.getElementById("email");
 const number = document.getElementById("number");
 const subject = document.getElementById("subject");
 const message = document.getElementById("message");
-
+const button = document.getElementById("submitButton");
 
 let randomNummer1;
 let randomNummer2;
 
+disableButton();
 GetCaptcha();
 
-email.addEventListener("input", (event) => {
-    if (email.validity.typeMismatch) {
-        email.setCustomValidity("Voer een geldig email in!");
-        email.reportValidity();
-    } else {
-        email.setCustomValidity("");
-    }
+name.addEventListener("blur", (event)=>{
+    validateName(true, name)
+    validateForm();
+});
+surname.addEventListener("blur", (event)=>{
+    validateName(true, surname)
+    validateForm();
 });
 
-number.addEventListener("input", (event) => {
-    if (number.validity.patternMismatch) {
-        number.setCustomValidity("Voer een geldig nummer in!");
-        number.reportValidity();
-    } else {
-        number.setCustomValidity("");
-    }
+email.addEventListener("blur", (event) => {
+    validateEmail(true)
+    validateForm();
+});
+
+number.addEventListener("blur", (event) => {
+    validateNumber(true)
+    validateForm();
+});
+
+subject.addEventListener("blur", (event)=>{
+    validateSubject(true);
+    validateForm();
+});
+message.addEventListener("blur", (event)=>{
+    validateMessage(true);
+    validateForm();
 });
 
 form.addEventListener("submit", async (event) => {
     // Then we prevent the form from being sent by canceling the event
     event.preventDefault();
 
-    // if the email field is valid, we let the form submit
-    if (!email.validity.valid) {
-        // If it isn't, we display an appropriate error message
-        return;
-    }
-    if (!number.validity.valid) {
-        return;
-    }
     let nummer = randomNumber1 + randomNumber2;
     if (parseInt(cappie.value) !== nummer) {
         LoadingAlert("Captcha");
@@ -68,7 +71,6 @@ form.addEventListener("submit", async (event) => {
         form.reset();
     }).catch(response => {
         LoadingAlert("Error");
-
     })
 });
 
@@ -101,6 +103,134 @@ function LoadingAlert(status){
     if(status === "Loading"){
         divLoading.innerHTML = '<div class="spinner"></div>';
     }
+}
+
+function validateForm(){
+    const validation = [
+            validateName(false, name),
+            validateName(false, surname),
+            validateSubject(),
+            validateMessage(),
+            validateEmail(),
+            validateNumber()
+        ];
+
+    if(validation.includes(false)){
+        disableButton();
+    }
+    else{
+        enableButton();
+    }
+}
+
+function validateEmail(displayError= false) {
+    const emailValue = email.value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    let errorMessage = "";
+    if (!emailValue) { // Check if email is empty
+        errorMessage = "Vul alsjeblieft een emailadres in.";
+    } else if (!emailRegex.test(emailValue)) { // Check if email format is invalid
+        errorMessage = "Email adres is incorrect";
+    } else {
+        email.setCustomValidity("");
+        return true;
+    }
+    if(displayError) {
+        email.setCustomValidity(errorMessage);
+        email.reportValidity();
+    }
+    return false;
+}
+function validateNumber(displayError = false){
+    const numberValue = number.value.trim();
+    const numberRegex = /^(?:(?:\+|00)31|0)(?:6\d{8})$/;
+
+    let errorMessage = "";
+    if (!numberValue) { // Check if email is empty
+        errorMessage = "Vul alsjeblieft een telefoonnummer in.";
+    } else if (!numberRegex.test(numberValue)) { // Check if email format is invalid
+        errorMessage = "Telefoonnummer is incorrect";
+    } else {
+        number.setCustomValidity("");
+        return true;
+    }
+    if(displayError) {
+        number.setCustomValidity(errorMessage);
+        number.reportValidity();
+    }
+    return false;
+}
+
+function validateName(displayError = false , nameType){
+    const nameValue = (nameType).value.trim();
+    const nameRegex = /^[a-zA-ZÀ-ÖØ-öø-ÿ\s'-]+$/;
+
+    let errorMessage = "";
+    if (!nameValue) { // Check if email is empty
+        errorMessage = "Vul alsjeblieft een naam in.";
+    } else if (!nameRegex.test(nameValue)) { // Check if email format is invalid
+        errorMessage = "Naam is incorrect";
+    } else {
+        (nameType).setCustomValidity("");
+        return true;
+    }
+    if(displayError) {
+        (nameType).setCustomValidity(errorMessage);
+        (nameType).reportValidity();
+    }
+    return false;
+}
+
+function validateSubject(displayError = false){
+    const subjectValue = subject.value.trim();
+
+    let errorMessage = "";
+    if(!subjectValue){
+        errorMessage = "Je bent het onderwerp vergeten";
+    }
+    else if(subjectValue > 200){
+        errorMessage = "Onderwerp mag niet langer zijn dan 200 karakters."
+    }
+    else{
+        subject.setCustomValidity("");
+        return true;
+    }
+
+    if(displayError){
+        subject.setCustomValidity(errorMessage);
+        subject.reportValidity();
+    }
+    return false;
+}
+
+function validateMessage(displayError = false){
+    const messageValue = message.value.trim();
+
+    let errorMessage = "";
+    if(!messageValue){
+        errorMessage = "Je bent het bericht vergeten";
+    }
+    else if(messageValue > 600){
+        errorMessage = "Bericht mag niet langer zijn dan 600 karakters"
+    }
+    else{
+        message.setCustomValidity("");
+        return true;
+    }
+
+    if(displayError){
+        message.setCustomValidity(errorMessage);
+        message.reportValidity();
+    }
+    return false;
+}
+
+function disableButton(){
+    button.setAttribute("disabled", "");
+}
+function enableButton(){
+    button.removeAttribute("disabled");
 }
 
 function GetCaptcha(){
