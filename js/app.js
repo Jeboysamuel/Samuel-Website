@@ -15,30 +15,33 @@ let randomNummer2;
 disableButton();
 GetCaptcha();
 
-name.addEventListener("input", (event)=>{
-    validateName(true)
+name.addEventListener("blur", (event)=>{
+    validateName(true, name)
     validateForm();
 });
-surname.addEventListener("input", (event)=>{
+surname.addEventListener("blur", (event)=>{
+    validateName(true, surname)
     validateForm();
 });
 
-email.addEventListener("input", (event) => {
+email.addEventListener("blur", (event) => {
     validateEmail(true)
     validateForm();
 });
 
-number.addEventListener("input", (event) => {
+number.addEventListener("blur", (event) => {
     validateNumber(true)
     validateForm();
 });
 
-// subject.addEventListener("blur", (event)=>{
-//     validateForm();
-// });
-// message.addEventListener("blur", (event)=>{
-//     validateForm();
-// });
+subject.addEventListener("blur", (event)=>{
+    validateSubject(true);
+    validateForm();
+});
+message.addEventListener("blur", (event)=>{
+    validateMessage(true);
+    validateForm();
+});
 
 form.addEventListener("submit", async (event) => {
     // Then we prevent the form from being sent by canceling the event
@@ -105,7 +108,10 @@ function LoadingAlert(status){
 
 function validateForm(){
     const validation = [
-            // validateName(),
+            validateName(false, name),
+            validateName(false, surname),
+            validateSubject(),
+            validateMessage(),
             validateEmail(),
             validateNumber()
         ];
@@ -117,6 +123,7 @@ function validateForm(){
         enableButton();
     }
 }
+
 function validateEmail(displayError= false) {
     const emailValue = email.value.trim();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -156,7 +163,7 @@ function validateNumber(displayError = false){
     return false;
 }
 
-function validateName(displayError, nameType){
+function validateName(displayError = false , nameType){
     const nameValue = (nameType).value.trim();
     const nameRegex = /^[a-zA-ZÀ-ÖØ-öø-ÿ\s'-]+$/;
 
@@ -172,6 +179,50 @@ function validateName(displayError, nameType){
     if(displayError) {
         (nameType).setCustomValidity(errorMessage);
         (nameType).reportValidity();
+    }
+    return false;
+}
+
+function validateSubject(displayError = false){
+    const subjectValue = subject.value.trim();
+
+    let errorMessage = "";
+    if(!subjectValue){
+        errorMessage = "Je bent het onderwerp vergeten";
+    }
+    else if(subjectValue > 200){
+        errorMessage = "Onderwerp mag niet langer zijn dan 200 karakters."
+    }
+    else{
+        subject.setCustomValidity("");
+        return true;
+    }
+
+    if(displayError){
+        subject.setCustomValidity(errorMessage);
+        subject.reportValidity();
+    }
+    return false;
+}
+
+function validateMessage(displayError = false){
+    const messageValue = message.value.trim();
+
+    let errorMessage = "";
+    if(!messageValue){
+        errorMessage = "Je bent het bericht vergeten";
+    }
+    else if(messageValue > 600){
+        errorMessage = "Bericht mag niet langer zijn dan 600 karakters"
+    }
+    else{
+        message.setCustomValidity("");
+        return true;
+    }
+
+    if(displayError){
+        message.setCustomValidity(errorMessage);
+        message.reportValidity();
     }
     return false;
 }
