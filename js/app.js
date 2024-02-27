@@ -71,7 +71,6 @@ form.addEventListener("submit", async (event) => {
         form.reset();
     }).catch(response => {
         LoadingAlert("Error");
-
     })
 });
 
